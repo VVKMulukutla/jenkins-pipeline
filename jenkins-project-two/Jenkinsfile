@@ -1,0 +1,35 @@
+pipeline {
+    agent none
+    stages {
+        stage('Front-end') {
+            agent {
+                docker {
+                    image 'maven:3.6.1-jdk-8'
+                }
+            }
+            steps {
+                sh 'mvn --version'
+            }
+        }
+        stage('Back-end') {
+            agent {
+                docker {
+                    image 'node:14.15.1'
+                }
+            }
+            steps {
+                sh 'node --version'
+            }
+        }
+        stage('Database') {
+            agent {
+                docker {
+                    image 'mysql:5.7.32'
+                }
+            }
+            steps {
+                sh 'mysql --version'
+            }
+        }
+    }
+}
